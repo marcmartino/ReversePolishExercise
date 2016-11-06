@@ -7,6 +7,8 @@ use \ReversePolishCalculator\Expression;
 use \ReversePolishCalculator\ExpressionEvaluator;
 use \ReversePolishCalculator\Operators\AdditionOperator;
 use \ReversePolishCalculator\Operators\MultiplicationOperator;
+use \ReversePolishCalculator\Exceptions\InvalidExpressionArray;
+use \ReversePolishCalculator\Exceptions\InvalidOperator;
 
 class CalculatorTest extends TestCase
 {

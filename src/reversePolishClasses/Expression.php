@@ -1,8 +1,8 @@
 <?php
 
-
 namespace ReversePolishCalculator;
 
+use \ReversePolishCalculator\Exceptions\InvalidExpressionArray;
 
 class Expression
 {
