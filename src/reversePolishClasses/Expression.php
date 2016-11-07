@@ -3,6 +3,8 @@
 namespace ReversePolishCalculator;
 
 use \ReversePolishCalculator\Exceptions\InvalidExpressionArray;
+use \ReversePolishCalculator\Operator;
+use \ReversePolishCalculator\Operand;
 
 class Expression
 {
@@ -12,7 +14,7 @@ class Expression
         if ($this->isArrayValid($expressionArray)) {
             $this->expressionArray = $expressionArray;
         }
-        throw new InvalidExpressionArray($expressionArray);
+        throw new InvalidExpressionArray("Cannot create expression from given array");
     }
 
     private function isArrayValid(array $testExpression) {
@@ -20,6 +22,7 @@ class Expression
             if (!(is_a($expressionItem, Operator::class) || is_a($expressionItem, Operand::class))) {
                 return false;
             }
+            var_dump($expressionItem);
             return true;
         }
     }

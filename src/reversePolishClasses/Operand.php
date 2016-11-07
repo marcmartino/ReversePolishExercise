@@ -8,9 +8,7 @@ class Operand
     private $value;
 
     function __construct(float $num) {
-        if (isset($num)) {
-            $this->setValue($num);
-        }
+        $this->setValue($num);
     }
 
     public function getValue(): float {
