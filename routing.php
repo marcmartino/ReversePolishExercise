@@ -18,10 +18,11 @@ $klein->respond('GET', '/calculate', function ($request, $response) {
         }, $calculation);
         $response->json($stringCalcArr);
     } catch (\ReversePolishCalculator\Exceptions\InvalidExpressionArray $e) {
-        $response->json(["status" => 505, "message" => $e->getMessage()]);
+        $response->code(503)->send($e->getMessage());
     } catch (\ReversePolishCalculator\Exceptions\InvalidOperator $e) {
-        $response->json(["status" => 505, "message" => $e->getMessage()]);
+        $response->code(503)->send($e->getMessage());
     }
+
 });
 
 $klein->dispatch();

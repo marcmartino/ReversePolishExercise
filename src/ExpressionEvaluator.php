@@ -16,7 +16,7 @@ class ExpressionEvaluator
             $expToEval = $this->getExpressionAroundOperator($expression, $nextOperatorPos);
             return $this->updateExpressionEvaluation($expression, $this->runOperator($expToEval), $nextOperatorPos);
         }
-        throw new InvalidExpressionArray($expression);
+        throw new InvalidExpressionArray("Expression cannot be evaluated further");
     }
 
     public function calculate(Expression $expression): array {
@@ -40,7 +40,7 @@ class ExpressionEvaluator
                 return $expIndex;
             }
         }
-        throw new InvalidExpressionArray($expressionArray);
+        throw new InvalidExpressionArray("Expression does not have a valid operator");
     }
 
     private function updateExpressionEvaluation(Expression $expression, Operand $operand, int $operatorPos): Expression {
@@ -55,7 +55,7 @@ class ExpressionEvaluator
         if (count($expArr) == 3 && is_a($expArr[2], Operator::class)) {
             return $expArr[2]->calculate($expArr[0], $expArr[1]);
         }
-        throw new InvalidExpressionArray($expression);
+        throw new InvalidExpressionArray("Expression cannot be evaluated");
     }
 
 

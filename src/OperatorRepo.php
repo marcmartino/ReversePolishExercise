@@ -19,6 +19,6 @@ class OperatorRepo
                 return new $operatorClass();
             }
         }
-        throw new InvalidOperator($operatorLookupString);
+        throw new InvalidOperator("Cannot find an operator for supplied token: " . $operatorLookupString);
     }
 }
