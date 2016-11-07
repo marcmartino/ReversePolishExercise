@@ -9,16 +9,17 @@ $klein->respond('GET', '/calculate', function ($request, $response) {
     $evaluator = new \ReversePolishCalculator\ExpressionEvaluator();
 
     try {
-
-        var_dump($request->param("exp"));
         $expression = new \ReversePolishCalculator\Expression($converter->fromString($request->param("exp")));
-        //var_dump($expression);
-        //$calculation = $evaluator->calculate($expression);
+        $calculation = $evaluator->calculate($expression);
 
-        //$jsonCalculations
-        //var_dump($this->sharedData());
-        $response->dump($expression);
+        //TODO: maybe create ExpressionCalculation class with this as a method
+        $stringCalcArr = array_map(function ($calcArr) use ($converter): string {
+            return $converter->toString($calcArr->getArray());
+        }, $calculation);
+        $response->json($stringCalcArr);
     } catch (\ReversePolishCalculator\Exceptions\InvalidExpressionArray $e) {
+        $response->json(["status" => 505, "message" => $e->getMessage()]);
+    } catch (\ReversePolishCalculator\Exceptions\InvalidOperator $e) {
         $response->json(["status" => 505, "message" => $e->getMessage()]);
     }
 });

@@ -13,8 +13,9 @@ class Expression
     public function __construct(array $expressionArray) {
         if ($this->isArrayValid($expressionArray)) {
             $this->expressionArray = $expressionArray;
+        } else {
+            throw new InvalidExpressionArray("Cannot create expression from given array");
         }
-        throw new InvalidExpressionArray("Cannot create expression from given array");
     }
 
     private function isArrayValid(array $testExpression) {
@@ -22,9 +23,8 @@ class Expression
             if (!(is_a($expressionItem, Operator::class) || is_a($expressionItem, Operand::class))) {
                 return false;
             }
-            var_dump($expressionItem);
-            return true;
         }
+        return true;
     }
 
     public function getArray(): array {
